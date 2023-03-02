@@ -4,6 +4,7 @@ import streamlit as st
 import plotly.express as px
 from streamlit_folium import folium_static
 import folium
+import emoji
 
 st.set_page_config( page_title='Países', page_icon='', layout = 'wide' )
 
@@ -99,9 +100,14 @@ df['Cuisines'] = df.loc[:, 'Cuisines'].astype(str).apply(lambda x: x.split(",")[
 #=========================================================================
 # LAYOUT DO STREAMLIT
 #=========================================================================
-tab1, tab2, tab3 = st.tabs(['Geral','Pais','Cidade'] )
+tab1, tab2, tab3 = st.tabs(['Geral'  + emoji.emojize(':earth_africa:'),'Pais'+ emoji.emojize(':book:'),'Cidade' + emoji.emojize(':office:')] )
 
 with tab1:
+    
+    st.markdown('##### A empresa Fome Zero é uma marketplace de restaurantes. Ou seja, seu core business é facilitar o encontro e negociações de clientes e restaurantes. Os restaurantes fazem o cadastro dentro da plataforma da Fome Zero, que disponibiliza informações como endereço, tipo de culinária servida, se possui reservas, se faz entregas e também uma nota de avaliação dos serviços e produtos do restaurante, dentre outras informações.')
+    st.markdown("""---""")
+    
+    
     col1, col2, col3, col4, col5 = st.columns(5,gap='large')
 
     with col1:
@@ -124,23 +130,20 @@ with tab1:
     with col5:
         avaliacoes_feitas = len( df['Aggregate rating'] )
         col5.metric('Avaliações Feitas', avaliacoes_feitas)
-    
-    
     st.markdown("""---""")
-
+    
+    
+    
+    st.markdown('##### Países Registrados')
     df_aux = df.loc[:, ['Pais', 'Latitude', 'Longitude' ] ].groupby(['Pais']).median().reset_index()
-
     map = folium.Map(zoom_start=11)
     for index, location_info in df_aux.iterrows():
                 folium.Marker( [location_info['Latitude'],
                               location_info['Longitude']],
                             popup=location_info[['Pais']] ).add_to( map )
-
     folium_static(map)
 
 
-    
-   
     
 
 with tab2:
@@ -205,6 +208,4 @@ with tab3:
             df1 = df.loc[:, ['City', 'Aggregate rating']].groupby('City').mean().reset_index().sort_values('Aggregate rating', ascending=False).round(2).tail(10)
             fig = px.bar(df1, x=df1['City'], y='Aggregate rating', labels={'x': 'Cidade', 'y': 'Número de Restaurantes'})
             fig.update_layout(title_text='Top 10 - Piores Médias de avaliações')
-            st.plotly_chart(fig, use_container_width=True)
-        
-        
+            st.plotly_chart(fig, use_container_width=True)  
