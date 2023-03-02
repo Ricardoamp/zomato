@@ -111,3 +111,6 @@ empresa e irá utilizá-las para entender melhor a empresa Fome Zero para conseg
 tomar decisões mais assertivas.
 Seu trabalho é utilizar os dados que a empresa Fome Zero possui e responder as
 perguntas feitas do CEO e criar o dashboard solicitado.
+
+
+link do projeto final: https://zomato-paises.streamlit.app/
