@@ -114,3 +114,9 @@ perguntas feitas do CEO e criar o dashboard solicitado.
 
 
 link do projeto final: https://zomato-paises.streamlit.app/
+
+
+# Próximos passos
+  1.Melhorias nas cores dos dashboards
+  2.Gráficos que melhor trazem as informações
+  3.Finalizar as perguntas relacionadas aos restaurantes e aos tipos de culinária
